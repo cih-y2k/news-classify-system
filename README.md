@@ -1,11 +1,11 @@
-# Preprocessing text
+# VietNam Text Classify Using TF-IDF and Naive Bayes
 Using regular expression to replace ignore character
 ```
 \\"|\\r|\\t|\\n -> null
 {"type":".+","title":"(.+)","content":" -> $1 + 1 space('$1 ')
 ","url":".+ -> null
 ```
-Using (UETSegmenter)[https://github.com/phongnt570/UETsegmenter] for word segmentation
+Using [UETSegmenter](https://github.com/phongnt570/UETsegmenter) for word segmentation
 ```
 - Using command line
 java -jar uetsegmenter.jar -r seg -m <models_path> -i <input_path> [-ie <input_extension>] -o <output_path> [-oe <output_extension>]
