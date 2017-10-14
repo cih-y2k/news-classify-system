@@ -24,7 +24,7 @@ public class Runner {
                 writer = new BufferedWriter(new FileWriter(output_path+"/"+file.getName()));
                 while ((line = reader.readLine()) != null){
                     if(line.trim().length() > 0){
-                        para += line + "\n";
+                        para += "\n" + line;
                     }else{
                             writer.write(preProcesser.preprocessString(para));
                             writer.newLine();
@@ -32,6 +32,7 @@ public class Runner {
                             para = "";
                     }
                 }
+                // add last para
                 writer.write(preProcesser.preprocessString(para));
                 writer.newLine();
                 writer.newLine();
