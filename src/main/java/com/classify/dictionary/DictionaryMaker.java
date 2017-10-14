@@ -21,9 +21,10 @@ public class DictionaryMaker {
         String line = "", para = "";
         while ((line = reader.readLine()) != null){
             if(line.trim().length() > 0){
-                para += "\n" + line;
+                para += "\n" + line.trim();
             }else{
-                sentences.add(new Sentence(para));
+                sentences.add(new Sentence(para.trim()));
+                para = "";
             }
         }
         // add last para

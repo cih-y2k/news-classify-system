@@ -8,14 +8,14 @@ public class TFIDFCalculator {
      * @param term String represents a term
      * @return term frequency of term in document
      */
-    private double tf(List<String> doc, String term) {
-        double result = 0;
+    public double tf(List<String> doc, String term) {
+        int result = 0;
         for (String word : doc) {
             if (term.equalsIgnoreCase(word)) {
                 result++;
             }
         }
-        return result / doc.size();
+        return (double)result / doc.size();
     }
 
     /**
@@ -23,8 +23,8 @@ public class TFIDFCalculator {
      * @param term String represents a term
      * @return the inverse term frequency of term in documents
      */
-    private double idf(List<List<String>> docs, String term) {
-        double n = 0;
+    public double idf(List<List<String>> docs, String term) {
+        int n = 0;
         for (List<String> doc : docs) {
             for (String word : doc) {
                 if (term.equalsIgnoreCase(word)) {
@@ -33,7 +33,7 @@ public class TFIDFCalculator {
                 }
             }
         }
-        return Math.log(docs.size() / n);
+        return Math.log(docs.size() / (double)n);
     }
 
     /**

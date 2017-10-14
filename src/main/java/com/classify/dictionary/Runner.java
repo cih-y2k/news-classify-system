@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Runner {
     public static void main(String[] args) throws IOException {
         String dataFolderUrl = "data/pre2";
-        String dictionaryUrl = "data/dictionay";
+        String dictionaryUrl = "data/dictionary";
 
         File folder = new File(dataFolderUrl);
         File[] listOfFiles = folder.listFiles();

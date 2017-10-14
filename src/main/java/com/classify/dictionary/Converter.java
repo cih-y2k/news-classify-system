@@ -46,7 +46,8 @@ public class Converter {
             List<String> item = new ArrayList<>();
             String[] a = sentence.getSentence().toLowerCase().split("[^_a-záàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+");
             for (String i : a) {
-                if (!stopwordList.contains(i)) {
+                i = i.trim();
+                if (!stopwordList.contains(i) && i.length() > 1) {
                     item.add(i);
                     features.add(i);
                 }
@@ -60,6 +61,10 @@ public class Converter {
         Map<String, List<Double>> map = new HashMap<>();
 
         List<List<String>> documents = splitText();
+
+        for (String word : features) {
+            map.put(word,new ArrayList<>());
+        }
 
         TFIDFCalculator calculator = new TFIDFCalculator();
         for (List<String> docs : documents) {
