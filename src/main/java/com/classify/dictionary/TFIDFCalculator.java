@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TFIDFCalculator {
     /**
-     * @param doc list of strings
+     * @param doc  list of strings
      * @param term String represents a term
      * @return term frequency of term in document
      */
@@ -15,7 +15,9 @@ public class TFIDFCalculator {
                 result++;
             }
         }
-        return (double)result / doc.size();
+        double rs = (double) result / doc.size();
+        if (Double.isNaN(rs)) System.out.println("NaN in tf: " + result + " " + doc.size());
+        return rs;
     }
 
     /**
@@ -33,11 +35,13 @@ public class TFIDFCalculator {
                 }
             }
         }
-        return Math.log(docs.size() / (double)n);
+        double rs = Math.log(docs.size() / (double) n);
+        if (Double.isNaN(rs)) System.out.println("NaN in idf");
+        return rs;
     }
 
     /**
-     * @param doc a text document
+     * @param doc  a text document
      * @param docs all documents
      * @param term term
      * @return the TF-IDF of term

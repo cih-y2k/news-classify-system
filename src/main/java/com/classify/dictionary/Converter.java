@@ -11,9 +11,10 @@ import java.util.*;
  */
 public class Converter {
     private List<Sentence> sentences;
-    private Set<String> stopwordList = new HashSet<>();
-    private static String url = "./vnstopword.txt";
+    private Set<String> vietnamDictionaryList = new HashSet<>();
+    private static String url = "./vn_words.txt";
     private Set<String> features = new HashSet<>();
+
 
     public Set<String> getFeatures() {
         splitText();
@@ -22,15 +23,15 @@ public class Converter {
 
     public Converter(List<Sentence> sentences) {
         this.sentences = sentences;
-        readStopWords();
+        readVietNamDicts();
     }
 
-    private void readStopWords() {
+    private void readVietNamDicts() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(url));
             String line;
             while ((line = reader.readLine()) != null) {
-                stopwordList.add(line.toLowerCase().trim());
+                vietnamDictionaryList.add(line.toLowerCase().trim());
             }
             reader.close();
         } catch (FileNotFoundException e) {
@@ -47,32 +48,42 @@ public class Converter {
             String[] a = sentence.getSentence().toLowerCase().split("[^_a-záàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+");
             for (String i : a) {
                 i = i.trim();
-                if (!stopwordList.contains(i) && i.length() > 1) {
+                if (vietnamDictionaryList.contains(i) && i.length() > 2) {
                     item.add(i);
                     features.add(i);
                 }
             }
-            rs.add(item);
+            if(item.size() > 0) rs.add(item);
         }
         return rs;
     }
 
     public Map<String, List<Double>> str2WordVector(){
-        Map<String, List<Double>> map = new HashMap<>();
+        // Init return value
+        Map<String, List<Double>> result = new HashMap<>();
+        // Init idf map
+        Map<String, Double> idfs = new HashMap<>();
+        // New obj TFIDFCalculator
+        TFIDFCalculator calculator = new TFIDFCalculator();
 
+        // Calculate idf for all word in features.
+        // Init ArrayList inside vector map
         List<List<String>> documents = splitText();
-
         for (String word : features) {
-            map.put(word,new ArrayList<>());
+            result.put(word,new ArrayList<>());
+            idfs.put(word,calculator.idf(documents,word));
         }
 
-        TFIDFCalculator calculator = new TFIDFCalculator();
+
+
         for (List<String> docs : documents) {
             List<Double> item = new ArrayList<>();
             for (String word : features) {
-                map.get(word).add(calculator.tfIdf(docs, documents, word));
+//                result.get(word).add(calculator.tfIdf(docs, documents, word));
+                // we already calculate idf above. So we only need calculate tf and then multiple with idf
+                result.get(word).add(calculator.tf(docs,word)*idfs.get(word));
             }
         }
-        return map;
+        return result;
     }
 }

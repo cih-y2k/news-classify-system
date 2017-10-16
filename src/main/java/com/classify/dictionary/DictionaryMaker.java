@@ -8,6 +8,7 @@ import java.util.Map;
 public class DictionaryMaker {
     private String fileUrl;
     private String dictionaryUrl;
+    final int MAX_POST = 1000;
 
     public DictionaryMaker(String fileUrl, String dictionaryUrl) {
         this.fileUrl = fileUrl;
@@ -18,11 +19,15 @@ public class DictionaryMaker {
         List<Sentence> sentences = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(fileUrl));
 
+        int count = 0;
+
         String line = "", para = "";
-        while ((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null && count < MAX_POST){
             if(line.trim().length() > 0){
-                para += "\n" + line.trim();
+                line = line.trim().toLowerCase();
+                para += "\n" + line;
             }else{
+                count++;
                 sentences.add(new Sentence(para.trim()));
                 para = "";
             }
@@ -41,7 +46,9 @@ public class DictionaryMaker {
         BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryUrl));
         map.forEach((key,val)->{
             Double avg = 0.0;
-            for(Double a : val) avg += a;
+            for(Double a : val) {
+                avg += a;
+            }
             try {
                 writer.write(key + " " + (avg/val.size()));
                 writer.newLine();
