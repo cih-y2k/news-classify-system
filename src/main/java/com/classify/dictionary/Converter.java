@@ -26,6 +26,10 @@ public class Converter {
         readVietNamDicts();
     }
 
+    public Converter() {
+        readVietNamDicts();
+    }
+
     private void readVietNamDicts() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(url));
@@ -41,6 +45,19 @@ public class Converter {
         }
     }
 
+    public List<String> splitText(String sentence) {
+        List<String> rs = new ArrayList<>();
+        List<String> item = new ArrayList<>();
+        String[] a = sentence.toLowerCase().split("[^_a-záàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+");
+        for (String i : a) {
+            i = i.trim();
+            if (vietnamDictionaryList.contains(i) && i.length() > 2) {
+                rs.add(i);
+            }
+        }
+        return rs;
+    }
+
     private List<List<String>> splitText() {
         List<List<String>> rs = new ArrayList<>();
         for (Sentence sentence : sentences) {
@@ -53,12 +70,12 @@ public class Converter {
                     features.add(i);
                 }
             }
-            if(item.size() > 0) rs.add(item);
+            if (item.size() > 0) rs.add(item);
         }
         return rs;
     }
 
-    public Map<String, List<Double>> str2WordVector(){
+    public Map<String, List<Double>> str2WordVector() {
         // Init return value
         Map<String, List<Double>> result = new HashMap<>();
         // Init idf map
@@ -70,10 +87,9 @@ public class Converter {
         // Init ArrayList inside vector map
         List<List<String>> documents = splitText();
         for (String word : features) {
-            result.put(word,new ArrayList<>());
-            idfs.put(word,calculator.idf(documents,word));
+            result.put(word, new ArrayList<>());
+            idfs.put(word, calculator.idf(documents, word));
         }
-
 
 
         for (List<String> docs : documents) {
@@ -81,7 +97,7 @@ public class Converter {
             for (String word : features) {
 //                result.get(word).add(calculator.tfIdf(docs, documents, word));
                 // we already calculate idf above. So we only need calculate tf and then multiple with idf
-                result.get(word).add(calculator.tf(docs,word)*idfs.get(word));
+                result.get(word).add(calculator.tf(docs, word) * idfs.get(word));
             }
         }
         return result;

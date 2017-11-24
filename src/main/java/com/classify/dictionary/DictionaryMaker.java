@@ -8,7 +8,7 @@ import java.util.Map;
 public class DictionaryMaker {
     private String fileUrl;
     private String dictionaryUrl;
-    final int MAX_POST = 1000;
+    final int MAX_POST = 500;
 
     public DictionaryMaker(String fileUrl, String dictionaryUrl) {
         this.fileUrl = fileUrl;
