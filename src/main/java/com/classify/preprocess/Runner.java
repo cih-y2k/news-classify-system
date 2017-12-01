@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) throws IOException {
-        String input_path = "data";
-        String output_path = "segment_data";
+        String input_path = "data/Data/VNE";
+        String output_path = "data/Data/VNE_segment";
 
         BufferedWriter writer;
         BufferedReader reader;

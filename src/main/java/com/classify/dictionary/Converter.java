@@ -17,7 +17,6 @@ public class Converter {
 
 
     public Set<String> getFeatures() {
-        splitText();
         return features;
     }
 
@@ -44,7 +43,7 @@ public class Converter {
             e.printStackTrace();
         }
     }
-
+    // Use in test package
     public List<String> splitText(String sentence) {
         List<String> rs = new ArrayList<>();
         List<String> item = new ArrayList<>();
@@ -58,7 +57,7 @@ public class Converter {
         return rs;
     }
 
-    private List<List<String>> splitText() {
+    public List<List<String>> splitText() {
         List<List<String>> rs = new ArrayList<>();
         for (Sentence sentence : sentences) {
             List<String> item = new ArrayList<>();
@@ -75,7 +74,7 @@ public class Converter {
         return rs;
     }
 
-    public Map<String, List<Double>> str2WordVector() {
+    public Map<String, List<Double>> str2WordVector(List<List<String>> documents) {
         // Init return value
         Map<String, List<Double>> result = new HashMap<>();
         // Init idf map
@@ -84,8 +83,6 @@ public class Converter {
         TFIDFCalculator calculator = new TFIDFCalculator();
 
         // Calculate idf for all word in features.
-        // Init ArrayList inside vector map
-        List<List<String>> documents = splitText();
         for (String word : features) {
             result.put(word, new ArrayList<>());
             idfs.put(word, calculator.idf(documents, word));
