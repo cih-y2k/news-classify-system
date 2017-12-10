@@ -27,5 +27,6 @@ public class Runner {
         }
         // TODO: Get frequency and write to file
         new Frequency(all_features, all_news).calculate();
+        System.out.println("Train done!");
     }
 }

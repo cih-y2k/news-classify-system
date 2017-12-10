@@ -31,10 +31,13 @@ NewsClassifySystem(root)
 ### How to run test
 - Setup java environment
 - Clone or download source code
-
+- Edit config in IConfig.java (com.classify.dictionary) - MAX_NUMBER_OF_NEW
+- Run com.classify.dictionary.Runner to train the model
+- Run com.classify.test.Checker to test the model
 ### Prepare data
 
 ### Bugs
 
 ### Features
+ - all_news list have size < TOTAL_NEWS : some news when split have no useful words
 

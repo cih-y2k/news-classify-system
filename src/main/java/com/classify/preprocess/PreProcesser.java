@@ -16,7 +16,7 @@ public class PreProcesser {
         return para;
     }
 
-    private String segmentText(String para){
+    public String segmentText(String para){
         UETSegmenter segmenter = new UETSegmenter(modelsPath);
         para = segmenter.segment(para);
 //        para = segmenter.segmentTokenizedText(para);

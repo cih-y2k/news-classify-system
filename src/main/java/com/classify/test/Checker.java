@@ -1,11 +1,8 @@
 package com.classify.test;
 
-import com.classify.dictionary.DictionaryMaker;
 import com.classify.dictionary.IConfig;
-import com.classify.dictionary.Sentence;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 
 public class Checker {
@@ -18,21 +15,18 @@ public class Checker {
         try{
             BufferedReader reader = new BufferedReader(new FileReader(path));
 
-            String line = "", para = "";
+            String line = "";
             while (total < limit && (line = reader.readLine()) != null){
-                if(line.trim().length() > 0){
+                if(line.trim().length() > 300){
                     line = line.trim().toLowerCase();
-                    para += "\n" + line;
-                }else{
                     total++;
-                    int rs = detecter.getLabel(para);
+                    int rs = detecter.getLabel(line);
                     if(rs == label) correct++;
-                    para = "";
                 }
             }
             // last para
             if(total < limit || limit == -1){
-                int rs = detecter.getLabel(para);
+                int rs = detecter.getLabel(line);
                 if(rs == label) correct++;
             }
 
@@ -45,12 +39,8 @@ public class Checker {
 
     public static void main(String[] args) {
         Checker checker = new Checker();
-
         for(int i = 0;i < IConfig.LABEL_COUNT;i++){
-            checker.check(IConfig.TEST_PARENT_PATH[i], i, 1000);
+            checker.check(IConfig.TEST_PATH[i], i, 300);
         }
     }
 }
-
-
-

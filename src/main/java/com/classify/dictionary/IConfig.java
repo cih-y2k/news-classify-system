@@ -11,16 +11,16 @@ public interface IConfig {
     // P(evidence) array
     double[] PRIOR_EACH_LABEL = {1/6, 1/6, 1/6, 1/6, 1/6, 1/6};
     // Labels
-    String LABELS[] = {"Giáo Dục", "Khoa Học", "Kinh Doanh", "Pháp Luật", "Sức Khỏe", "Thể Thao"};
+    String LABELS[] = {"Education", "Science", "Business", "Law", "Health", "Sport"};
     // Train data path
-    String TRAIN_PARENT_PATH = "data/train_v2";
+    String TRAIN_PARENT_PATH = "data/train";
     // test
-    String[] TEST_PARENT_PATH = { "data/train_v3/giaoduc_v3.dat", "data/train_v3/khoahoc_v3.dat", "data/train_v3/kinhdoanh_v3.dat",
-    "data/train_v3/phapluat_v3.dat", "data/train_v3/suckhoe_v3.dat", "data/train_v3/thethao_v3.dat"};
+    String[] TEST_PATH = { "data/test/giaoduc.txt", "data/test/khoahoc.txt", "data/test/kinhdoanh.txt",
+    "data/test/phapluat.txt", "data/test/suckhoe.txt", "data/test/thethao.txt"};
     // parent directory to save dic
     String DICS_PARENT_PATH = "data/dictionary";
     // Dictionary path
-    String DICTIONARY_URL[] = {"data/dictionary/giaoduc_v2.dic", "data/dictionary/khoahoc_v2.dic", "data/dictionary/kinhdoanh_v2.dic",
-            "data/dictionary/phapluat_v2.dic", "data/dictionary/suckhoe_v2.dic", "data/dictionary/thethao_v2.dic"};
+    String DICTIONARY_URL[] = {"data/dictionary/giaoduc.dic", "data/dictionary/khoahoc.dic", "data/dictionary/kinhdoanh.dic",
+            "data/dictionary/phapluat.dic", "data/dictionary/suckhoe.dic", "data/dictionary/thethao.dic"};
     String FREQUENCY_PATH = "data/frequency.fre";
 }

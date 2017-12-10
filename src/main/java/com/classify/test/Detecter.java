@@ -54,7 +54,6 @@ public class Detecter {
 //
 //    }
 
-
     public int getLabel(String data){
         List<String> words = new Converter().splitText(data);
         double[] result = new double[IConfig.LABEL_COUNT];

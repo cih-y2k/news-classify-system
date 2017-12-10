@@ -24,15 +24,12 @@ public class DictionaryMaker {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileUrl));
             int count = 0;
-            String line = "", para = "";
+            String line;
             while (count < IConfig.MAX_NUMBER_OF_NEW && (line = reader.readLine()) != null) {
-                if (line.trim().length() > 0) {
+                if (line.trim().length() > 300) {
                     line = line.trim().toLowerCase();
-                    para += "\n" + line;
-                } else if(para.trim().length() > 100){
                     count++;
-                    sentences.add(new Sentence(para.trim()));
-                    para = "";
+                    sentences.add(new Sentence(line));
                 }
             }
             reader.close();

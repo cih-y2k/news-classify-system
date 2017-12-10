@@ -1,9 +1,5 @@
 package com.classify.dictionary;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 /*
@@ -11,8 +7,8 @@ import java.util.*;
  */
 public class Converter {
     private List<Sentence> sentences;
-    private Set<String> vietnamDictionaryList = new HashSet<>();
-    private static String url = "./vn_words.txt";
+//    private Set<String> vietnamDictionaryList = new HashSet<>();
+//    private static String url = "./vn_words.txt";
     private Set<String> features = new HashSet<>();
 
 
@@ -22,35 +18,34 @@ public class Converter {
 
     public Converter(List<Sentence> sentences) {
         this.sentences = sentences;
-        readVietNamDicts();
+//        readVietNamDicts();
     }
 
     public Converter() {
-        readVietNamDicts();
+//        readVietNamDicts();
     }
 
-    private void readVietNamDicts() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(url));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                vietnamDictionaryList.add(line.toLowerCase().trim());
-            }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void readVietNamDicts() {
+//        try {
+//            BufferedReader reader = new BufferedReader(new FileReader(url));
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                vietnamDictionaryList.add(line.toLowerCase().trim());
+//            }
+//            reader.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     // Use in test package
     public List<String> splitText(String sentence) {
         List<String> rs = new ArrayList<>();
-        List<String> item = new ArrayList<>();
         String[] a = sentence.toLowerCase().split("[^_a-záàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+");
         for (String i : a) {
             i = i.trim();
-            if (vietnamDictionaryList.contains(i) && i.length() > 2) {
+            if (/*vietnamDictionaryList.contains(i)*/ i.length() < 15 && i.length() > 2) {
                 rs.add(i);
             }
         }
@@ -64,7 +59,7 @@ public class Converter {
             String[] a = sentence.getSentence().toLowerCase().split("[^_a-záàảãạăắằẳẵặâấầẩẫậđéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+");
             for (String i : a) {
                 i = i.trim();
-                if (vietnamDictionaryList.contains(i) && i.length() > 2) {
+                if (/*vietnamDictionaryList.contains(i)*/ i.length() < 15 && i.length() > 2) {
                     item.add(i);
                     features.add(i);
                 }
