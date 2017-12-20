@@ -3,11 +3,11 @@ package com.classify.dictionary;
 public interface IConfig {
     int LABEL_COUNT = 6; // Number of labels
     // TODO: Long - reduce MAX_NUMBER_OF_NEW if OutOfMemory
-    int MAX_NUMBER_OF_NEW = 1000; // all label must have number of news equal or greater than MAX_NUMBER_OF_NEW
+    int MAX_NUMBER_OF_NEW = 500; // all label must have number of news equal or greater than MAX_NUMBER_OF_NEW
     // Sum of all element in NUMBER_NEWS_EACH_LABEL array
     int TOTAL_NEWS = MAX_NUMBER_OF_NEW*LABEL_COUNT;
     // TODO: Config NUMBER_NEWS_EACH_LABEL
-    int[] NUMBER_NEWS_EACH_LABEL = {1000, 1000, 1000, 1000, 1000, 1000};
+    int[] NUMBER_NEWS_EACH_LABEL = {500, 500, 500, 500, 500, 500};
     // P(evidence) array
     double[] PRIOR_EACH_LABEL = {1/6, 1/6, 1/6, 1/6, 1/6, 1/6};
     // Labels

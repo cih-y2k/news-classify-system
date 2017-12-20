@@ -85,7 +85,7 @@ public class Converter {
 
 
         for (List<String> docs : documents) {
-            List<Double> item = new ArrayList<>();
+//            List<Double> item = new ArrayList<>();
             for (String word : features) {
 //                result.get(word).add(calculator.tfIdf(docs, documents, word));
                 // we already calculate idf above. So we only need calculate tf and then multiple with idf
